@@ -1,4 +1,4 @@
-# Murungi Precious Portfolio
+# Murungi Portfolio
 
 A modern personal portfolio website showcasing my skills, projects, experience, and professional background in IT Support, UI/UX Design, and Digital Solutions.
 
@@ -34,7 +34,7 @@ Open the project folder and launch the `index.html` file in your browser.
 
 ## Author
 
-Murungi Precious
+Murungi
 
 ## Credits
 
