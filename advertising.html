@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertising Designs - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        @media (prefers-reduced-motion: no-preference) {
+            .reveal {
+                animation: reveal 0.6s ease-out forwards;
+                opacity: 0;
+            }
+            .reveal.d1 { animation-delay: 0.1s; }
+            .reveal.d2 { animation-delay: 0.2s; }
+            .reveal.d3 { animation-delay: 0.3s; }
+            .reveal.d4 { animation-delay: 0.4s; }
+            @keyframes reveal {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white transition-colors" x-data="galleryLightbox()">
+
+    <!-- ═══ NAVIGATION ═══ -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-zinc-950/95 backdrop-blur border-b border-zinc-100 dark:border-zinc-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="font-display font-bold text-xl md:text-2xl text-zinc-900 dark:text-white hover:text-accent transition-colors">Portfolio</a>
+                
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#work" class="nl text-sm font-medium">Back to Portfolio</a>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div x-show="mobileMenuOpen" x-transition class="md:hidden pb-4 border-t border-zinc-100 dark:border-zinc-800">
+                <a href="index.html#work" class="nl block py-2 text-sm font-medium">Back to Portfolio</a>
+                <button @click="darkMode = !darkMode" class="w-full text-left py-2 text-sm font-medium flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                    Dark Mode
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO SECTION ═══ -->
+    <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal">
+                <h1 class="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white mb-4">Advertising Designs</h1>
+                <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl">Promotional adverts, product posters, campaign graphics, and marketing visuals designed for online and print promotion.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ GALLERY SECTION ═══ -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                
+                <!-- Perfumes Campaign -->
+                <article class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(0)">
+                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
+                        <img src="Images/Web Banner for Perfumes  Uganda.png" alt="Perfumes Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-5 md:p-6">
+                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Perfumes Campaign</h3>
+                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Professional product advertisement highlighting features and benefits for e-commerce platforms.</p>
+                    </div>
+                </article>
+
+                <!-- Smart Phones Campaign -->
+                <article class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(1)">
+                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
+                        <img src="Images/Web banner for Smart Phones Uganda.png" alt="Smart Phones Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-5 md:p-6">
+                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Smart Phones Campaign</h3>
+                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Professional product advertisement highlighting features and benefits for e-commerce platforms.</p>
+                    </div>
+                </article>
+
+                <!-- Watches Campaign -->
+                <article class="card-h reveal d3 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(2)">
+                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
+                        <img src="Images/Web Banner for Watches Uganda.png" alt="Watches Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-5 md:p-6">
+                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Watches Campaign</h3>
+                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Professional product advertisement highlighting features and benefits for e-commerce platforms.</p>
+                    </div>
+                </article>
+
+                <!-- Speakers Campaign -->
+                <article class="card-h reveal d4 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(3)">
+                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
+                        <img src="Images/Web banner Post for Speakers Uganda.png" alt="Speakers Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-5 md:p-6">
+                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Speakers Campaign</h3>
+                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Professional product advertisement highlighting features and benefits for e-commerce platforms.</p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ BACK LINK ═══ -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8 border-t border-zinc-100 dark:border-zinc-800">
+        <div class="max-w-7xl mx-auto">
+            <a href="index.html#work" class="inline-flex items-center gap-2 text-accent font-medium hover:gap-3 transition-all">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                Back to Portfolio
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="bg-zinc-100 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 mt-16 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-zinc-600 dark:text-zinc-400">
+            <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ═══ LIGHTBOX MODAL ═══ -->
+    <div x-show="lightboxOpen" x-transition class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" @click.self="closeLightbox()">
+        <div class="relative max-w-4xl w-full">
+            <!-- Close Button -->
+            <button @click="closeLightbox()" class="absolute -top-10 right-0 text-white hover:text-accent transition-colors">
+                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            
+            <!-- Image -->
+            <img :src="currentImageSrc" :alt="'Expanded view'" class="w-full h-auto rounded-lg shadow-2xl">
+            
+            <!-- Navigation -->
+            <div class="flex justify-between items-center mt-6">
+                <button @click="previousImage()" class="text-white hover:text-accent transition-colors flex items-center gap-2">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    Previous
+                </button>
+                <span class="text-white text-sm" x-text="(currentIndex + 1) + ' / ' + images.length"></span>
+                <button @click="nextImage()" class="text-white hover:text-accent transition-colors flex items-center gap-2">
+                    Next
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function galleryLightbox() {
+            return {
+                lightboxOpen: false,
+                currentIndex: 0,
+                images: [
+                    'Images/Web Banner for Perfumes  Uganda.png',
+                    'Images/Web banner for Smart Phones Uganda.png',
+                    'Images/Web Banner for Watches Uganda.png',
+                    'Images/Web banner Post for Speakers Uganda.png'
+                ],
+                mobileMenuOpen: false,
+                darkMode: localStorage.getItem('darkMode') === 'true',
+                
+                openLightbox(index) {
+                    this.currentIndex = index;
+                    this.lightboxOpen = true;
+                    document.body.style.overflow = 'hidden';
+                },
+                
+                closeLightbox() {
+                    this.lightboxOpen = false;
+                    document.body.style.overflow = 'auto';
+                },
+                
+                nextImage() {
+                    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                },
+                
+                previousImage() {
+                    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                },
+                
+                get currentImageSrc() {
+                    return this.images[this.currentIndex];
+                },
+                
+                init() {
+                    if (this.darkMode) document.documentElement.classList.add('dark');
+                    this.$watch('darkMode', (val) => {
+                        localStorage.setItem('darkMode', val);
+                        if (val) document.documentElement.classList.add('dark');
+                        else document.documentElement.classList.remove('dark');
+                    });
+                    
+                    // Keyboard navigation
+                    window.addEventListener('keydown', (e) => {
+                        if (!this.lightboxOpen) return;
+                        if (e.key === 'ArrowRight') this.nextImage();
+                        if (e.key === 'ArrowLeft') this.previousImage();
+                        if (e.key === 'Escape') this.closeLightbox();
+                    });
+                }
+            }
+        }
+    </script>
+    <script src="js/app.js"></script>
+</body>
+</html>
