@@ -36,10 +36,6 @@ Open the project folder and launch the `index.html` file in your browser.
 
 Murungi
 
-## Credits
-
-This project was customized from the Folio template distributed by ThemeWagon.
-
 ## License
 
 This project is for personal portfolio and educational purposes.

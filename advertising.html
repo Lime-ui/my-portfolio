@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advertising Designs - Portfolio</title>
+    <title>Advertising Designs — Murungi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
@@ -87,7 +87,7 @@
                 <!-- Perfumes Campaign -->
                 <article class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(0)">
                     <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/Web Banner for Perfumes  Uganda.png" alt="Perfumes Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <img src="Images/web-banner-perfumes-uganda.png" alt="Perfumes Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-4 sm:p-5 md:p-6">
                         <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Perfumes Campaign</h3>
@@ -98,7 +98,7 @@
                 <!-- Smart Phones Campaign -->
                 <article class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(1)">
                     <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/Web banner for Smart Phones Uganda.png" alt="Smart Phones Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <img src="Images/web-banner-smart-phones-uganda.png" alt="Smart Phones Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-4 sm:p-5 md:p-6">
                         <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Smart Phones Campaign</h3>
@@ -109,7 +109,7 @@
                 <!-- Watches Campaign -->
                 <article class="card-h reveal d3 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(2)">
                     <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/Web Banner for Watches Uganda.png" alt="Watches Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <img src="Images/web-banner-watches-uganda.png" alt="Watches Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-4 sm:p-5 md:p-6">
                         <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Watches Campaign</h3>
@@ -120,7 +120,7 @@
                 <!-- Speakers Campaign -->
                 <article class="card-h reveal d4 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(3)">
                     <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/Web banner Post for Speakers Uganda.png" alt="Speakers Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <img src="Images/web-banner-speakers-uganda.png" alt="Speakers Product Advertisement" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-4 sm:p-5 md:p-6">
                         <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Speakers Campaign</h3>
@@ -145,7 +145,7 @@
     <!-- ═══ FOOTER ═══ -->
     <footer class="bg-zinc-100 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 mt-16 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-zinc-600 dark:text-zinc-400">
-            <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+            <p>&copy; <span id="year"></span> Murungi. All rights reserved.</p>
         </div>
     </footer>
 
@@ -181,13 +181,13 @@
                 lightboxOpen: false,
                 currentIndex: 0,
                 images: [
-                    'Images/Web Banner for Perfumes  Uganda.png',
-                    'Images/Web banner for Smart Phones Uganda.png',
-                    'Images/Web Banner for Watches Uganda.png',
-                    'Images/Web banner Post for Speakers Uganda.png'
+                    'Images/web-banner-perfumes-uganda.png',
+                    'Images/web-banner-smart-phones-uganda.png',
+                    'Images/web-banner-watches-uganda.png',
+                    'Images/web-banner-speakers-uganda.png'
                 ],
                 mobileMenuOpen: false,
-                darkMode: localStorage.getItem('darkMode') === 'true',
+                darkMode: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches),
                 
                 openLightbox(index) {
                     this.currentIndex = index;
@@ -214,8 +214,9 @@
                 
                 init() {
                     if (this.darkMode) document.documentElement.classList.add('dark');
+                    document.getElementById('year').textContent = new Date().getFullYear();
                     this.$watch('darkMode', (val) => {
-                        localStorage.setItem('darkMode', val);
+                        localStorage.setItem('theme', val ? 'dark' : 'light');
                         if (val) document.documentElement.classList.add('dark');
                         else document.documentElement.classList.remove('dark');
                     });
