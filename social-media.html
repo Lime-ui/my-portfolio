@@ -18,34 +18,34 @@
             .reveal.d3 { animation-delay: 0.3s; }
             .reveal.d4 { animation-delay: 0.4s; }
             @keyframes reveal {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+                from { opacity: 0; transform: translateY(20px); }
+                to   { opacity: 1; transform: translateY(0); }
             }
+        }
+        .cluster-img {
+            width: 100%; height: 100%; object-fit: cover; cursor: pointer;
+            transition: transform .3s cubic-bezier(.4,0,.2,1);
+        }
+        .cluster-img:hover {
+            transform: scale(1.08);
+        }
+        .cluster-cell {
+            overflow: hidden; border-radius: .5rem;
         }
     </style>
 </head>
-<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white transition-colors" x-data="galleryLightbox()">
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white transition-colors" x-data="galleryApp()">
 
     <!-- ═══ NAVIGATION ═══ -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-zinc-950/95 backdrop-blur border-b border-zinc-100 dark:border-zinc-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="index.html" class="font-display font-bold text-xl md:text-2xl text-zinc-900 dark:text-white hover:text-accent transition-colors">Portfolio</a>
-                
-                <!-- Mobile Menu Button -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
-
-                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-8">
                     <a href="index.html#work" class="nl text-sm font-medium">Back to Portfolio</a>
                     <button @click="darkMode = !darkMode" class="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
@@ -55,8 +55,6 @@
                     </button>
                 </div>
             </div>
-
-            <!-- Mobile Menu -->
             <div x-show="mobileMenuOpen" x-transition class="md:hidden pb-4 border-t border-zinc-100 dark:border-zinc-800">
                 <a href="index.html#work" class="nl block py-2 text-sm font-medium">Back to Portfolio</a>
                 <button @click="darkMode = !darkMode" class="w-full text-left py-2 text-sm font-medium flex items-center gap-2">
@@ -69,62 +67,123 @@
         </div>
     </nav>
 
-    <!-- ═══ HERO SECTION ═══ -->
-    <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <!-- ═══ HERO ═══ -->
+    <section class="pt-28 pb-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="reveal">
                 <h1 class="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white mb-4">Social Media Designs</h1>
-                <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl">A collection of social media creatives designed for Instagram posts, product promotions, campaigns, and digital engagement.</p>
+                <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl">Campaign creatives, brand visuals, and engagement-driven graphics crafted for social media platforms.</p>
             </div>
         </div>
     </section>
 
-    <!-- ═══ GALLERY SECTION ═══ -->
-    <section class="py-12 px-4 sm:px-6 lg:px-8">
+    <!-- ═══ PROJECT CLUSTERS ═══ -->
+    <section class="pb-16 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                
-                <!-- Instagram Campaign 1 -->
-                <article class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(0)">
-                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/akara-1.jpg" alt="Instagram Campaign 1" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Instagram Campaign</h3>
-                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Eye-catching social media poster designed for maximum engagement and brand visibility.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- ─── PROJECT 1: Akara Brand Campaign (4 images → 2×2) ─── -->
+                <article class="card-h reveal d1 group rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent overflow-hidden">
+                    <div class="p-4 sm:p-5">
+                        <div class="grid grid-cols-2 gap-2 h-48 sm:h-56 md:h-64">
+                            <div class="cluster-cell">
+                                <img src="Images/akara-1.jpg" alt="Akara campaign visual 1" loading="lazy" class="cluster-img" @click="openLightbox(['Images/akara-1.jpg','Images/akara-2.jpg','Images/akara-3.jpg','Images/akara-4.jpg'], 0)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/akara-2.jpg" alt="Akara campaign visual 2" loading="lazy" class="cluster-img" @click="openLightbox(['Images/akara-1.jpg','Images/akara-2.jpg','Images/akara-3.jpg','Images/akara-4.jpg'], 1)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/akara-3.jpg" alt="Akara campaign visual 3" loading="lazy" class="cluster-img" @click="openLightbox(['Images/akara-1.jpg','Images/akara-2.jpg','Images/akara-3.jpg','Images/akara-4.jpg'], 2)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/akara-4.jpg" alt="Akara campaign visual 4" loading="lazy" class="cluster-img" @click="openLightbox(['Images/akara-1.jpg','Images/akara-2.jpg','Images/akara-3.jpg','Images/akara-4.jpg'], 3)">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white">Akara Brand Campaign</h3>
+                                <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-accent px-2.5 py-1 rounded-full border border-accent/30 bg-accent/5">Social Media Campaign</span>
+                            </div>
+                            <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Instagram campaign creatives for Akara, featuring bold product visuals and promotional messaging designed to drive engagement and brand awareness.</p>
+                        </div>
                     </div>
                 </article>
 
-                <!-- Instagram Campaign 2 -->
-                <article class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(1)">
-                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/akara-2.jpg" alt="Instagram Campaign 2" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Instagram Campaign</h3>
-                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Eye-catching social media poster designed for maximum engagement and brand visibility.</p>
+                <!-- ─── PROJECT 2: Cullina Collection (4 images → 2×2) ─── -->
+                <article class="card-h reveal d2 group rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent overflow-hidden">
+                    <div class="p-4 sm:p-5">
+                        <div class="grid grid-cols-2 gap-2 h-48 sm:h-56 md:h-64">
+                            <div class="cluster-cell">
+                                <img src="Images/cullina1.JPG" alt="Cullina visual 1" loading="lazy" class="cluster-img" @click="openLightbox(['Images/cullina1.JPG','Images/cullina2.JPG','Images/cullina3.JPG','Images/cullina4.JPG'], 0)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/cullina2.JPG" alt="Cullina visual 2" loading="lazy" class="cluster-img" @click="openLightbox(['Images/cullina1.JPG','Images/cullina2.JPG','Images/cullina3.JPG','Images/cullina4.JPG'], 1)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/cullina3.JPG" alt="Cullina visual 3" loading="lazy" class="cluster-img" @click="openLightbox(['Images/cullina1.JPG','Images/cullina2.JPG','Images/cullina3.JPG','Images/cullina4.JPG'], 2)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/cullina4.JPG" alt="Cullina visual 4" loading="lazy" class="cluster-img" @click="openLightbox(['Images/cullina1.JPG','Images/cullina2.JPG','Images/cullina3.JPG','Images/cullina4.JPG'], 3)">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white">Cullina Collection</h3>
+                                <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-accent px-2.5 py-1 rounded-full border border-accent/30 bg-accent/5">Social Media Campaign</span>
+                            </div>
+                            <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Social media visuals for the Cullina brand, showcasing product highlights with clean compositions and vibrant lifestyle imagery.</p>
+                        </div>
                     </div>
                 </article>
 
-                <!-- Instagram Campaign 3 -->
-                <article class="card-h reveal d3 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(2)">
-                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/akara-3.jpg" alt="Instagram Campaign 3" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Instagram Campaign</h3>
-                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Eye-catching social media poster designed for maximum engagement and brand visibility.</p>
+                <!-- ─── PROJECT 3: Hiddi Lifestyle Series (3 images → large + stacked) ─── -->
+                <article class="card-h reveal d3 group rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent overflow-hidden">
+                    <div class="p-4 sm:p-5">
+                        <div class="grid grid-cols-2 gap-2 h-48 sm:h-56 md:h-64">
+                            <div class="cluster-cell row-span-2">
+                                <img src="Images/hiddi1.JPG" alt="Hiddi lifestyle visual 1" loading="lazy" class="cluster-img" @click="openLightbox(['Images/hiddi1.JPG','Images/hiddi2.JPG','Images/hiddi3.JPG'], 0)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/hiddi2.JPG" alt="Hiddi lifestyle visual 2" loading="lazy" class="cluster-img" @click="openLightbox(['Images/hiddi1.JPG','Images/hiddi2.JPG','Images/hiddi3.JPG'], 1)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/hiddi3.JPG" alt="Hiddi lifestyle visual 3" loading="lazy" class="cluster-img" @click="openLightbox(['Images/hiddi1.JPG','Images/hiddi2.JPG','Images/hiddi3.JPG'], 2)">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white">Hiddi Lifestyle Series</h3>
+                                <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-accent px-2.5 py-1 rounded-full border border-accent/30 bg-accent/5">Event Design</span>
+                            </div>
+                            <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Event and lifestyle-focused social media graphics for Hiddi, designed to capture attention and communicate brand energy.</p>
+                        </div>
                     </div>
                 </article>
 
-                <!-- Instagram Campaign 4 -->
-                <article class="card-h reveal d4 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(3)">
-                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/akara-4.jpg" alt="Instagram Campaign 4" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">Instagram Campaign</h3>
-                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Eye-catching social media poster designed for maximum engagement and brand visibility.</p>
+                <!-- ─── PROJECT 4: Orea Product Spotlight (4 images → 2×2) ─── -->
+                <article class="card-h reveal d4 group rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent overflow-hidden">
+                    <div class="p-4 sm:p-5">
+                        <div class="grid grid-cols-2 gap-2 h-48 sm:h-56 md:h-64">
+                            <div class="cluster-cell">
+                                <img src="Images/orea1.JPG" alt="Orea product visual 1" loading="lazy" class="cluster-img" @click="openLightbox(['Images/orea1.JPG','Images/orea2.JPG','Images/orea3.JPG','Images/orea4.JPG'], 0)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/orea2.JPG" alt="Orea product visual 2" loading="lazy" class="cluster-img" @click="openLightbox(['Images/orea1.JPG','Images/orea2.JPG','Images/orea3.JPG','Images/orea4.JPG'], 1)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/orea3.JPG" alt="Orea product visual 3" loading="lazy" class="cluster-img" @click="openLightbox(['Images/orea1.JPG','Images/orea2.JPG','Images/orea3.JPG','Images/orea4.JPG'], 2)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/orea4.JPG" alt="Orea product visual 4" loading="lazy" class="cluster-img" @click="openLightbox(['Images/orea1.JPG','Images/orea2.JPG','Images/orea3.JPG','Images/orea4.JPG'], 3)">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white">Orea Product Spotlight</h3>
+                                <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-accent px-2.5 py-1 rounded-full border border-accent/30 bg-accent/5">Product Advertising</span>
+                            </div>
+                            <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Product-focused social media creatives for Orea, using minimalist layouts and strong calls to action to elevate brand presence.</p>
+                        </div>
                     </div>
                 </article>
 
@@ -151,22 +210,17 @@
 
     <!-- ═══ LIGHTBOX MODAL ═══ -->
     <div x-show="lightboxOpen" x-transition class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" @click.self="closeLightbox()">
-        <div class="relative max-w-4xl w-full">
-            <!-- Close Button -->
+        <div class="relative flex items-center justify-center w-full max-w-6xl">
             <button @click="closeLightbox()" class="absolute -top-10 right-0 text-white hover:text-accent transition-colors">
                 <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
-            
-            <!-- Image -->
-            <img :src="currentImageSrc" :alt="'Expanded view'" class="w-full h-auto rounded-lg shadow-2xl">
-            
-            <!-- Navigation -->
+            <img :src="currentImageSrc" :alt="'Expanded view'" class="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl">
             <div class="flex justify-between items-center mt-6">
                 <button @click="previousImage()" class="text-white hover:text-accent transition-colors flex items-center gap-2">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     Previous
                 </button>
-                <span class="text-white text-sm" x-text="(currentIndex + 1) + ' / ' + images.length"></span>
+                <span class="text-white text-sm" x-text="(currentIndex + 1) + ' / ' + currentImages.length"></span>
                 <button @click="nextImage()" class="text-white hover:text-accent transition-colors flex items-center gap-2">
                     Next
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -176,42 +230,38 @@
     </div>
 
     <script>
-        function galleryLightbox() {
+        function galleryApp() {
             return {
+                darkMode: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches),
+                mobileMenuOpen: false,
                 lightboxOpen: false,
                 currentIndex: 0,
-                images: [
-                    'Images/akara-1.jpg',
-                    'Images/akara-2.jpg',
-                    'Images/akara-3.jpg',
-                    'Images/akara-4.jpg'
-                ],
-                mobileMenuOpen: false,
-                darkMode: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches),
-                
-                openLightbox(index) {
+                currentImages: [],
+
+                openLightbox(images, index) {
+                    this.currentImages = images;
                     this.currentIndex = index;
                     this.lightboxOpen = true;
                     document.body.style.overflow = 'hidden';
                 },
-                
+
                 closeLightbox() {
                     this.lightboxOpen = false;
                     document.body.style.overflow = 'auto';
                 },
-                
+
                 nextImage() {
-                    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                    this.currentIndex = (this.currentIndex + 1) % this.currentImages.length;
                 },
-                
+
                 previousImage() {
-                    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                    this.currentIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
                 },
-                
+
                 get currentImageSrc() {
-                    return this.images[this.currentIndex];
+                    return this.currentImages[this.currentIndex];
                 },
-                
+
                 init() {
                     if (this.darkMode) document.documentElement.classList.add('dark');
                     document.getElementById('year').textContent = new Date().getFullYear();
@@ -220,8 +270,6 @@
                         if (val) document.documentElement.classList.add('dark');
                         else document.documentElement.classList.remove('dark');
                     });
-                    
-                    // Keyboard navigation
                     window.addEventListener('keydown', (e) => {
                         if (!this.lightboxOpen) return;
                         if (e.key === 'ArrowRight') this.nextImage();

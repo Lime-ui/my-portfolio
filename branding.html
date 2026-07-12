@@ -18,34 +18,34 @@
             .reveal.d3 { animation-delay: 0.3s; }
             .reveal.d4 { animation-delay: 0.4s; }
             @keyframes reveal {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+                from { opacity: 0; transform: translateY(20px); }
+                to   { opacity: 1; transform: translateY(0); }
             }
+        }
+        .cluster-img {
+            width: 100%; height: 100%; object-fit: cover; cursor: pointer;
+            transition: transform .3s cubic-bezier(.4,0,.2,1);
+        }
+        .cluster-img:hover {
+            transform: scale(1.08);
+        }
+        .cluster-cell {
+            overflow: hidden; border-radius: .5rem;
         }
     </style>
 </head>
-<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white transition-colors" x-data="galleryLightbox()">
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white transition-colors" x-data="galleryApp()">
 
     <!-- ═══ NAVIGATION ═══ -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-zinc-950/95 backdrop-blur border-b border-zinc-100 dark:border-zinc-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="index.html" class="font-display font-bold text-xl md:text-2xl text-zinc-900 dark:text-white hover:text-accent transition-colors">Portfolio</a>
-                
-                <!-- Mobile Menu Button -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
-
-                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-8">
                     <a href="index.html#work" class="nl text-sm font-medium">Back to Portfolio</a>
                     <button @click="darkMode = !darkMode" class="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
@@ -55,8 +55,6 @@
                     </button>
                 </div>
             </div>
-
-            <!-- Mobile Menu -->
             <div x-show="mobileMenuOpen" x-transition class="md:hidden pb-4 border-t border-zinc-100 dark:border-zinc-800">
                 <a href="index.html#work" class="nl block py-2 text-sm font-medium">Back to Portfolio</a>
                 <button @click="darkMode = !darkMode" class="w-full text-left py-2 text-sm font-medium flex items-center gap-2">
@@ -69,40 +67,74 @@
         </div>
     </nav>
 
-    <!-- ═══ HERO SECTION ═══ -->
-    <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <!-- ═══ HERO ═══ -->
+    <section class="pt-28 pb-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="reveal">
                 <h1 class="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white mb-4">Branding Projects</h1>
-                <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl">Logo designs, brand identity concepts, mockups, and visual design materials created to build consistent brand presence.</p>
+                <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl">Logo designs, brand identity systems, and visual guidelines crafted to establish cohesive brand presence.</p>
             </div>
         </div>
     </section>
 
-    <!-- ═══ GALLERY SECTION ═══ -->
-    <section class="py-12 px-4 sm:px-6 lg:px-8">
+    <!-- ═══ PROJECT CLUSTERS ═══ -->
+    <section class="pb-16 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                
-                <!-- AgroVive Brand Identity 1 -->
-                <article class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(0)">
-                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/agrovive.png" alt="AgroVive Brand Identity" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">AgroVive Brand Identity</h3>
-                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Logo, color palette, and typography guidelines for cohesive brand identity across all touchpoints.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- ─── PROJECT 1: Cullina Brand Identity (1 image as face) ─── -->
+                <article class="card-h reveal d1 group rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent overflow-hidden">
+                    <div class="p-4 sm:p-5">
+                        <div class="h-48 sm:h-56 md:h-80 overflow-hidden rounded-lg">
+                            <img src="Images/cullina-logo.JPG" alt="Cullina logo design" loading="lazy" class="cluster-img" @click="openLightbox(['Images/cullina-logo.JPG'], 0)">
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white">Cullina Brand Identity</h3>
+                                <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-accent px-2.5 py-1 rounded-full border border-accent/30 bg-accent/5">Logo Design</span>
+                            </div>
+                            <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Custom logo and visual identity system for Cullina, featuring a distinctive mark and cohesive brand language.</p>
+                        </div>
                     </div>
                 </article>
 
-                <!-- AgroVive Brand Identity 2 -->
-                <article class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent cursor-pointer" @click="openLightbox(1)">
-                    <div class="w-full h-48 sm:h-56 md:h-64 overflow-hidden">
-                        <img src="Images/agrovive-2.png" alt="AgroVive Brand Identity Design" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                <!-- ─── PROJECT 2: BookHive Logo Design (1 image) ─── -->
+                <article class="card-h reveal d2 group rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent overflow-hidden">
+                    <div class="p-4 sm:p-5">
+                        <div class="h-48 sm:h-56 md:h-80 overflow-hidden rounded-lg">
+                            <img src="Images/bookhive-logo.JPG" alt="BookHive logo design" loading="lazy" class="cluster-img" @click="openLightbox(['Images/bookhive-logo.JPG'], 0)">
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white">BookHive Logo Design</h3>
+                                <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-accent px-2.5 py-1 rounded-full border border-accent/30 bg-accent/5">Logo Design</span>
+                            </div>
+                            <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Clean, memorable logo for BookHive, combining literary themes with modern minimalism for a recognisable brand mark.</p>
+                        </div>
                     </div>
-                    <div class="p-4 sm:p-5 md:p-6">
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white mb-2">AgroVive Design System</h3>
-                        <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Complete design system showcasing brand guidelines and visual identity standards.</p>
+                </article>
+
+                <!-- ─── PROJECT 3: AgroVive Brand Suite (3 images → large + stacked) ─── -->
+                <article class="card-h reveal d3 group rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent overflow-hidden">
+                    <div class="p-4 sm:p-5">
+                        <div class="grid grid-cols-2 gap-2 h-48 sm:h-56 md:h-64">
+                            <div class="cluster-cell row-span-2">
+                                <img src="Images/agrovive.png" alt="AgroVive brand visual 1" loading="lazy" class="cluster-img" @click="openLightbox(['Images/agrovive.png','Images/agrovive-2.png','Images/agrovive-3.png'], 0)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/agrovive-2.png" alt="AgroVive brand visual 2" loading="lazy" class="cluster-img" @click="openLightbox(['Images/agrovive.png','Images/agrovive-2.png','Images/agrovive-3.png'], 1)">
+                            </div>
+                            <div class="cluster-cell">
+                                <img src="Images/agrovive-3.png" alt="AgroVive brand visual 3" loading="lazy" class="cluster-img" @click="openLightbox(['Images/agrovive.png','Images/agrovive-2.png','Images/agrovive-3.png'], 2)">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <h3 class="font-display font-bold text-lg sm:text-xl text-zinc-900 dark:text-white">AgroVive Brand Suite</h3>
+                                <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-accent px-2.5 py-1 rounded-full border border-accent/30 bg-accent/5">Brand Identity</span>
+                            </div>
+                            <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Complete brand identity system for AgroVive, including logo, colour palette, typography guidelines, and application mockups.</p>
+                        </div>
                     </div>
                 </article>
 
@@ -129,22 +161,17 @@
 
     <!-- ═══ LIGHTBOX MODAL ═══ -->
     <div x-show="lightboxOpen" x-transition class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" @click.self="closeLightbox()">
-        <div class="relative max-w-4xl w-full">
-            <!-- Close Button -->
+        <div class="relative flex items-center justify-center w-full max-w-6xl">
             <button @click="closeLightbox()" class="absolute -top-10 right-0 text-white hover:text-accent transition-colors">
                 <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
-            
-            <!-- Image -->
-            <img :src="currentImageSrc" :alt="'Expanded view'" class="w-full h-auto rounded-lg shadow-2xl">
-            
-            <!-- Navigation -->
+            <img :src="currentImageSrc" :alt="'Expanded view'" class="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl">
             <div class="flex justify-between items-center mt-6">
                 <button @click="previousImage()" class="text-white hover:text-accent transition-colors flex items-center gap-2">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     Previous
                 </button>
-                <span class="text-white text-sm" x-text="(currentIndex + 1) + ' / ' + images.length"></span>
+                <span class="text-white text-sm" x-text="(currentIndex + 1) + ' / ' + currentImages.length"></span>
                 <button @click="nextImage()" class="text-white hover:text-accent transition-colors flex items-center gap-2">
                     Next
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -154,40 +181,38 @@
     </div>
 
     <script>
-        function galleryLightbox() {
+        function galleryApp() {
             return {
+                darkMode: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches),
+                mobileMenuOpen: false,
                 lightboxOpen: false,
                 currentIndex: 0,
-                images: [
-                    'Images/agrovive.png',
-                    'Images/agrovive-2.png'
-                ],
-                mobileMenuOpen: false,
-                darkMode: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches),
-                
-                openLightbox(index) {
+                currentImages: [],
+
+                openLightbox(images, index) {
+                    this.currentImages = images;
                     this.currentIndex = index;
                     this.lightboxOpen = true;
                     document.body.style.overflow = 'hidden';
                 },
-                
+
                 closeLightbox() {
                     this.lightboxOpen = false;
                     document.body.style.overflow = 'auto';
                 },
-                
+
                 nextImage() {
-                    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                    this.currentIndex = (this.currentIndex + 1) % this.currentImages.length;
                 },
-                
+
                 previousImage() {
-                    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                    this.currentIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
                 },
-                
+
                 get currentImageSrc() {
-                    return this.images[this.currentIndex];
+                    return this.currentImages[this.currentIndex];
                 },
-                
+
                 init() {
                     if (this.darkMode) document.documentElement.classList.add('dark');
                     document.getElementById('year').textContent = new Date().getFullYear();
@@ -196,8 +221,6 @@
                         if (val) document.documentElement.classList.add('dark');
                         else document.documentElement.classList.remove('dark');
                     });
-                    
-                    // Keyboard navigation
                     window.addEventListener('keydown', (e) => {
                         if (!this.lightboxOpen) return;
                         if (e.key === 'ArrowRight') this.nextImage();
