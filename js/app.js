@@ -1,17 +1,11 @@
 ﻿// ─── Index page ───
 function app() {
   return {
-    dark: false,
     mm: false,
     sc: false,
     s: 'hero',
     init() {
-      this.dark = localStorage.getItem('theme') === 'dark' ||
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      this.$watch('dark', v => {
-        localStorage.setItem('theme', v ? 'dark' : 'light');
-        document.getElementById('vanta-bg').style.background = v ? '#09090b' : '#ffffff';
-      });
+      document.getElementById('vanta-bg').style.background = '#ffffff';
       window.addEventListener('scroll', () => {
         this.sc = window.scrollY > 20;
         this.updateSection();
@@ -27,7 +21,7 @@ function app() {
       if (window.particlesJS) {
         try {
           if (window.pJSDom) { window.pJSDom.forEach(p => p.pJS.fn.vendors.destroy()); window.pJSDom = []; }
-          document.getElementById('vanta-bg').style.background = this.dark ? '#09090b' : '#ffffff';
+          document.getElementById('vanta-bg').style.background = '#ffffff';
           particlesJS('vanta-bg', {
             particles: {
               number: { value: 60, density: { enable: true } },

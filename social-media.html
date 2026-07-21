@@ -50,21 +50,17 @@
                 </button>
                 <div class="hidden md:flex items-center gap-8">
                     <a href="index.html#work" class="nl text-sm font-medium">Back to Portfolio</a>
-                    <button @click="darkMode = !darkMode" class="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-                        </svg>
+                    <button class="p-2 rounded-lg cursor-default">
+                        <svg class="w-5 h-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
                     </button>
                 </div>
             </div>
             <div x-show="mobileMenuOpen" x-transition class="md:hidden pb-4 border-t border-zinc-100 dark:border-zinc-800">
                 <a href="index.html#work" class="nl block py-2 text-sm font-medium">Back to Portfolio</a>
-                <button @click="darkMode = !darkMode" class="w-full text-left py-2 text-sm font-medium flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-                    </svg>
+                <div class="py-2 text-sm font-medium flex items-center gap-2 text-zinc-400">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
                     Dark Mode
-                </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -234,7 +230,6 @@
     <script>
         function galleryApp() {
             return {
-                darkMode: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches),
                 mobileMenuOpen: false,
                 lightboxOpen: false,
                 currentIndex: 0,
@@ -265,13 +260,7 @@
                 },
 
                 init() {
-                    if (this.darkMode) document.documentElement.classList.add('dark');
                     document.getElementById('year').textContent = new Date().getFullYear();
-                    this.$watch('darkMode', (val) => {
-                        localStorage.setItem('theme', val ? 'dark' : 'light');
-                        if (val) document.documentElement.classList.add('dark');
-                        else document.documentElement.classList.remove('dark');
-                    });
                     window.addEventListener('keydown', (e) => {
                         if (!this.lightboxOpen) return;
                         if (e.key === 'ArrowRight') this.nextImage();
